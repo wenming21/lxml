@@ -325,6 +325,12 @@ def cflags(static_cflags):
         result.append('-g2')
     if OPTION_CSTD:
         result.append(f'/std:{OPTION_CSTD}' if sys.platform == 'win32' else f'-std={OPTION_CSTD}')
+    if sys.platform == 'win32' and OPTION_STATIC:
+        # Disable whole-program-optimisation in static MSVC builds to avoid
+        # link errors (C1047) when the static libraries were built with a
+        # different MSVC toolset version, e.g. the prebuilt ones downloaded
+        # from https://github.com/lxml/libxml2-win-binaries/releases
+        result.append('/GL-')
 
     if OPTION_STATIC:
         if not static_cflags:

@@ -15,6 +15,10 @@ Features added
 Bugs fixed
 ----------
 
+* Static builds on Windows no longer use whole-program-optimisation to avoid
+  linking errors (C1047) when the prebuilt static libraries were built with a
+  different MSVC toolset version.
+
 * LP#2164984: Returning non-element types from a parser target in ``XMLDTDID()`` could crash.
 
 * LP#2165904: Content of PIs and comments set through their ``.text`` property was not validated.
